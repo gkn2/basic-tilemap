@@ -324,6 +324,9 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
     )
 })
 function loadlevel () {
+    for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+        sprites.destroy(value)
+    }
     if (currentlevel == 0) {
         tiles.setCurrentTilemap(tilemap`level2`)
     } else if (currentlevel == 1) {
@@ -388,8 +391,8 @@ function spawnghost () {
             ........................
             ........................
             `, SpriteKind.Enemy)
+        sprite2.follow(mySprite, 25)
         sprite2.setFlag(SpriteFlag.GhostThroughWalls, true)
-        sprite2.follow(mySprite, 35)
         animation.runImageAnimation(
         sprite2,
         [img`
@@ -577,14 +580,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let sprite3: Sprite = null
 let sprite4: Sprite = null
-let sprite2: Sprite = null
-let mySprite: Sprite = null
 let coin: Sprite = null
+let mySprite: Sprite = null
+let sprite2: Sprite = null
 let currentlevel = 0
 loadlevel()
 currentlevel = 0
 info.setScore(0)
 spawnhero()
+placeplayer()
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -707,3 +711,4 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
+sprite2.follow(mySprite, 25)

@@ -333,7 +333,10 @@ function loadlevel () {
     spawnapple()
 }
 function placeplayer () {
-	
+    for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
+        tiles.placeOnTile(mySprite, value)
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
 }
 function spawnhero () {
     mySprite = sprites.create(img`
